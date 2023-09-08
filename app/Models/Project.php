@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
+
+    public function tenant()
+    {
+        return $this->user(Tenant::class);
+    }
 }
