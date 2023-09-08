@@ -11,6 +11,6 @@ class Project extends Model
 
     public function tenant()
     {
-        return $this->user(Tenant::class);
+        return $this->belongsTo(Tenant::class);
     }
 }

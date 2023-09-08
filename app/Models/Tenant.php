@@ -13,6 +13,6 @@ class Tenant extends Model
 
     public function user()
     {
-        return $this->user(User::class);
+        return $this->belongsTo(User::class);
     }
 }
