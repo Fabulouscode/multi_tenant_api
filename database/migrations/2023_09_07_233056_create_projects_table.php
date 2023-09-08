@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
             $table->string('name', 15);
             $table->foreignId('tenant_id')->constrained();
             $table->timestamps();
