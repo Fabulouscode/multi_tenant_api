@@ -26,7 +26,7 @@ class LoginController extends Controller
         return $this->jsonResponse(HTTP_SUCCESS, 'Login successful', [
             'token' => $accessToken,
             'expires_at' => $expiresAt,
-            'user' => new UserResource(),
+            'user' => new UserResource($user),
         ]);
     }
 
