@@ -6,6 +6,7 @@ use App\Http\Requests\ProjectRequest;
 use App\Http\Resources\ProjectResource;
 use App\Models\Project;
 use App\Models\Tenant;
+use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
@@ -32,5 +33,16 @@ class ProjectController extends Controller
     public function show(Tenant $tenant, Project $project)
     {
         return $this->jsonResponse(HTTP_SUCCESS, 'Project retrieved successfully', new ProjectResource($project));
+    }
+
+    public function update(Request $request, Tenant $tenant, Project $project)
+    {
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:100', 'min:5', 'unique:projects'],
+        ]);
+
+        $project->update($validatedData);
+
+        return $this->jsonResponse(HTTP_SUCCESS, 'Route updated successfully', new ProjectResource($project));
     }
 }

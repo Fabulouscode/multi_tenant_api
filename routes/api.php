@@ -3,6 +3,7 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,5 +26,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/', [ProjectController::class, 'index'])->name('index');
         Route::post('/', [ProjectController::class, 'store'])->name('store');
         Route::get('/{project:uuid}', [ProjectController::class, 'show'])->name('show');
+        Route::put('/{project:uuid}', [ProjectController::class, 'update'])->name('update');
+    });
+
+    Route::prefix('{tenant:subdomain}/users')->name('user.')->group(static function () {
+        Route::post('/', [UserController::class, 'store'])->name('store');
     });
 });
