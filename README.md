@@ -18,3 +18,17 @@ Before you begin, ensure you have met the following requirements:
    ```bash
    git clone https://github.com/Fabulouscode/multi_tenant_api.git
    cd multi-tenant-api
+```
+2. Build and start the Docker containers:
+
+```bash
+docker-compose build
+docker-compose up -d
+```
+3. Install Laravel dependencies and set up the database:
+
+```bash
+docker-compose exec app composer install
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan db:seed
+```
