@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('tenants', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->foreignId('user_id')->constrained();
             $table->string('subdomain')->unique();
             $table->string('name', 15)->nullable();
             $table->string('address')->nullable();

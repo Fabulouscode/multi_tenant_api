@@ -13,14 +13,21 @@ class RegistrationService
     public function createUser(RegistrationRequest $request)
     {
         DB::transaction(function () use ($request) {
-            $user = User::create($request->validatedData());
+            $subdomain = $request->subdomain . '.tenant.com';
 
-            $subdomain = 'https://' . $request->subdomain . '.tenant.com';
+            $validatedData = $request->validatedData();
 
-            Tenant::create([
+            $tenant = Tenant::create([
                 'uuid' => Str::orderedUuid(),
-                'user_id' => $user->id,
                 'subdomain' => $subdomain,
+            ]);    
+
+            $user = User::create([
+                'uuid' => Str::orderedUuid(),
+                'email' => $validatedData['email'],
+                'name' => $validatedData['name'],
+                'password' => $validatedData['password'],
+                'tenant_id' => $tenant->id,
             ]);
 
             return $user;

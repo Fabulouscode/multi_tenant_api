@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,10 @@ Route::prefix('auth')->group(static function () {
     Route::post('/login', [LoginController::class, 'login'])->name('login');
 });
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::prefix('{tenant:subdomain}/projects')->name('project.')->group(static function () {
+        Route::get('/', [ProjectController::class, 'index'])->name('index');
+        Route::post('/', [ProjectController::class, 'store'])->name('store');
+        Route::get('/{project:uuid}', [ProjectController::class, 'show'])->name('show');
+    });
+});
