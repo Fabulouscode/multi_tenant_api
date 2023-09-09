@@ -16,5 +16,5 @@ Before you begin, ensure you have met the following requirements:
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/Fabulouscode/multi_tenant_api
+   git clone https://github.com/Fabulouscode/multi_tenant_api.git
    cd multi-tenant-api
