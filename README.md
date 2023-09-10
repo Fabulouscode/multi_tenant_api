@@ -25,12 +25,6 @@ Before you begin, ensure you have met the following requirements:
     docker-compose build
     docker-compose up -d
 ```
-3. Install Laravel dependencies and set up the database:
-
-```bash
-    docker-compose exec app composer install
-    docker-compose exec app php artisan migrate
-```
 
 ### Postman documentation
 
