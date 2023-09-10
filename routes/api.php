@@ -3,6 +3,7 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\StatusController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,3 +34,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/', [UserController::class, 'store'])->name('store');
     });
 });
+
+Route::get('/', [StatusController::class, 'index']);
